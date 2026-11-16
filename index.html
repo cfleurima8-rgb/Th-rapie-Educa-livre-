@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10284b">
+<title>THÉRAPIE EDUCA LIVRE</title>
+<style>
+:root{--navy:#10284b;--blue:#1e4778;--gold:#c9a64a;--paper:#f4f6fa;--ink:#18263b;--muted:#68778c;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--paper);color:var(--ink)}
+header{background:var(--navy);color:white;padding:16px max(5vw,20px);display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;position:sticky;top:0;z-index:5;box-shadow:0 3px 14px #06152c30}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-weight:800;font-size:18px}.brand strong{display:block;letter-spacing:.5px}.brand small{color:#d7e0ec}
+nav{display:flex;gap:8px;flex-wrap:wrap}button,.btn{border:0;border-radius:8px;padding:11px 15px;font-weight:700;cursor:pointer;background:var(--gold);color:var(--navy)}button.secondary{background:#e8edf4;color:var(--navy)}button.dark{background:var(--navy);color:white}button:hover,.btn:hover{filter:brightness(.96)}
+.hero{background:linear-gradient(120deg,#10284b 0%,#1e4778 70%,#315d89 100%);color:white;padding:76px max(6vw,22px);display:grid;grid-template-columns:1.4fr .8fr;align-items:center;gap:35px}
+.hero h1{font-size:clamp(2rem,5vw,3.8rem);line-height:1.08;margin:12px 0}.hero p{color:#e0e8f2;max-width:620px;line-height:1.7;font-size:1.05rem}.eyebrow{color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;font-size:.78rem}
+.hero-art{min-height:230px;border:1px solid #ffffff30;border-radius:22px;background:linear-gradient(145deg,#ffffff18,#ffffff08);display:grid;place-items:center;text-align:center;padding:25px}.book{font-size:85px;filter:drop-shadow(0 12px 12px #06152c55)}.hero-art strong{display:block;color:#f4d98b;font-size:1.2rem;margin-top:10px}
+main{max-width:1160px;margin:auto;padding:42px 22px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:22px}.section-head h2{margin:0;color:var(--navy);font-size:1.8rem}.section-head p{color:var(--muted);margin:7px 0 0}
+.search{width:min(100%,320px);padding:12px 14px;border:1px solid #d6deea;border-radius:9px;font:inherit;background:white}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:18px}.card{background:white;border:1px solid #e5eaf1;border-radius:15px;padding:20px;box-shadow:0 6px 20px #10284b0a}.card h3{margin:10px 0 8px;color:var(--navy)}.card p{color:var(--muted);line-height:1.55}.tag{display:inline-block;padding:5px 9px;border-radius:30px;background:#edf2f8;color:var(--blue);font-size:.78rem;font-weight:700}.card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.iconbox{width:44px;height:44px;border-radius:12px;background:#f8f1dc;display:grid;place-items:center;font-size:22px}
+.info{background:#fff;border-left:4px solid var(--gold);padding:16px 18px;border-radius:8px;color:#526176;line-height:1.6;margin-top:25px}
+footer{background:var(--navy);color:#dbe4ef;padding:30px 22px;text-align:center}footer strong{color:var(--gold)}
+.modal{position:fixed;inset:0;background:#06152c99;display:none;align-items:center;justify-content:center;padding:18px;z-index:10}.modal.open{display:flex}.modal-box{background:white;border-radius:16px;padding:25px;width:min(100%,560px);max-height:90vh;overflow:auto}.modal-box h2{color:var(--navy);margin-top:0}.close{float:right;background:#edf1f6;color:var(--navy);padding:7px 11px}
+form{display:grid;gap:12px}label{font-weight:700;font-size:.9rem;color:#34445b}input,textarea,select{width:100%;padding:12px;border:1px solid #d6deea;border-radius:8px;font:inherit;background:white}textarea{min-height:105px;resize:vertical}.field{display:grid;gap:6px}.hidden{display:none!important}.notice{padding:12px;border-radius:8px;background:#fff7df;color:#6e5516;font-size:.9rem;line-height:1.5}.lesson{border-top:1px solid #e6ebf1;padding:14px 0}.lesson h4{margin:0 0 8px;color:var(--navy)}audio{width:100%;margin-top:8px}.empty{color:var(--muted);padding:24px;text-align:center;background:white;border-radius:12px}
+@media(max-width:720px){.hero{grid-template-columns:1fr;padding-top:55px}.hero-art{min-height:160px}.book{font-size:60px}header{position:static}.brand strong{font-size:.9rem}nav button{padding:9px 11px;font-size:.85rem}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="logo">TL</div><div><strong>THÉRAPIE EDUCA LIVRE</strong><small>Apprendre. Comprendre. Évoluer.</small></div></div>
+  <nav>
+    <button class="secondary" onclick="goHome()">Accueil</button>
+    <button class="secondary" onclick="document.querySelector('#formations').scrollIntoView({behavior:'smooth'})">Formations</button>
+    <button onclick="openModal('registerModal')">Inscription gratuite</button>
+    <button class="secondary" onclick="openModal('adminModal')">Administration</button>
+  </nav>
+</header>
+<section class="hero">
+  <div><div class="eyebrow">La connaissance accessible à tous</div><h1>Apprendre.<br>Comprendre.<br><span style="color:#f0d58a">Évoluer.</span></h1><p>Découvrez des formations gratuites, apprenez à votre rythme et développez vos connaissances grâce aux leçons écrites, aux fichiers audio et aux ressources pédagogiques.</p><button onclick="document.querySelector('#formations').scrollIntoView({behavior:'smooth'})">Découvrir les formations →</button></div>
+  <div class="hero-art"><div><div class="book">📚</div><strong>Votre espace de savoir</strong><div style="color:#e0e8f2;margin-top:8px">Formations 100 % gratuites</div></div></div>
+</section>
+<main>
+  <section id="formations">
+    <div class="section-head"><div><div class="eyebrow">Catalogue pédagogique</div><h2>Nos formations</h2><p>Choisissez un domaine et commencez votre apprentissage.</p></div><input class="search" id="search" placeholder="Rechercher une formation…" oninput="renderCourses()"></div>
+    <div class="grid" id="courseGrid"></div>
+  </section>
+  <section style="margin-top:48px">
+    <div class="section-head"><div><div class="eyebrow">Notre engagement</div><h2>Une formation ouverte à tous</h2></div></div>
+    <div class="grid">
+      <article class="card"><div class="iconbox">✍️</div><h3>Leçons écrites</h3><p>Des contenus structurés pour apprendre et relire les notions essentielles.</p></article>
+      <article class="card"><div class="iconbox">🎧</div><h3>Leçons audio</h3><p>Écoutez les fichiers audio ajoutés par l'administration à votre rythme.</p></article>
+      <article class="card"><div class="iconbox">📄</div><h3>Documents PDF</h3><p>Retrouvez des supports pédagogiques associés aux formations.</p></article>
+    </div>
+  </section>
+  <div class="info"><strong>Information :</strong> l'inscription et toutes les formations sont gratuites. Les cours sont ajoutés et gérés exclusivement par l'administration.</div>
+</main>
+<footer><strong>THÉRAPIE EDUCA LIVRE</strong><br>Apprendre. Comprendre. Évoluer.<br><small>© <span id="year"></span> — Plateforme de formation gratuite</small></footer>
+
+<div class="modal" id="registerModal"><div class="modal-box"><button class="close" onclick="closeModal('registerModal')">✕</button><h2>Créer un compte apprenant</h2><p>Inscription gratuite</p><form id="registerForm"><div class="field"><label>Nom complet</label><input id="studentName" required placeholder="Votre nom complet"></div><div class="field"><label>Adresse e-mail</label><input id="studentEmail" type="email" required placeholder="nom@exemple.com"></div><div class="field"><label>Mot de passe</label><input id="studentPassword" type="password" minlength="8" required placeholder="8 caractères minimum"></div><button type="submit">Créer mon compte</button></form><p id="registerMessage" aria-live="polite"></p><div class="notice">Prototype de démonstration : les comptes sont conservés uniquement dans ce navigateur. Pour une vraie mise en ligne, il faudra connecter une authentification sécurisée et une base de données.</div></div></div>
+
+<div class="modal" id="adminModal"><div class="modal-box"><button class="close" onclick="closeModal('adminModal')">✕</button><h2>Espace administration</h2><div class="notice">Cette version est une maquette locale. Ne saisissez pas de vrai mot de passe ici. L'accès administrateur devra être protégé côté serveur avant publication.</div><form id="adminForm"><div class="field"><label>Code de démonstration</label><input id="adminCode" type="password" placeholder="Code de démonstration"></div><button type="submit">Ouvrir le tableau de bord démo</button></form><p id="adminMessage"></p><div id="adminPanel" class="hidden"><hr><h3>Ajouter une formation</h3><form id="courseForm"><div class="field"><label>Titre de la formation</label><input id="courseTitle" required></div><div class="field"><label>Catégorie</label><select id="courseCategory"><option>Communication et journalisme</option><option>Philosophie</option><option>Sociologie</option><option>Sciences juridiques</option><option>Littérature</option><option>Psychologie</option><option>Sciences de l'éducation</option><option>Informatique</option></select></div><div class="field"><label>Description</label><textarea id="courseDescription" required></textarea></div><div class="field"><label>Contenu de la première leçon</label><textarea id="lessonText" placeholder="Écrivez le contenu de la leçon…"></textarea></div><div class="field"><label>Fichier audio (MP3, WAV, M4A)</label><input id="audioFile" type="file" accept="audio/*"></div><div class="field"><label>Document PDF</label><input id="pdfFile" type="file" accept="application/pdf"></div><button type="submit">Ajouter au catalogue</button></form><p id="courseMessage"></p></div></div></div>
+
+<div class="modal" id="lessonModal"><div class="modal-box"><button class="close" onclick="closeModal('lessonModal')">✕</button><div id="lessonContent"></div></div></div>
+<script>
+const starter=[
+ {id:1,title:"Introduction au journalisme",category:"Communication et journalisme",description:"Découvrez les bases du journalisme, le rôle du journaliste et les principes de l'information.",text:"Bienvenue dans cette introduction au journalisme. Cette formation présente les notions fondamentales, les missions du journaliste et l'importance de vérifier les informations.",audio:null,pdf:null},
+ {id:2,title:"Introduction à la philosophie",category:"Philosophie",description:"Explorez les grandes questions et les premiers concepts de la réflexion philosophique.",text:"La philosophie est une démarche de réflexion critique qui cherche à interroger le monde, la connaissance, la vérité et l'existence humaine.",audio:null,pdf:null},
+ {id:3,title:"Notions fondamentales de sociologie",category:"Sociologie",description:"Comprenez la société, les groupes sociaux et les relations entre les individus.",text:"La sociologie étudie les sociétés humaines, leurs institutions, leurs relations et les phénomènes sociaux.",audio:null,pdf:null}
+];
+let courses=JSON.parse(localStorage.getItem("tel_courses")||"null")||starter;
+function save(){localStorage.setItem("tel_courses",JSON.stringify(courses))}
+function goHome(){window.scrollTo({top:0,behavior:"smooth"})}
+function openModal(id){document.getElementById(id).classList.add("open")}
+function closeModal(id){document.getElementById(id).classList.remove("open")}
+function renderCourses(){
+ const q=(document.getElementById("search").value||"").toLowerCase();
+ const filtered=courses.filter(c=>(c.title+" "+c.category+" "+c.description).toLowerCase().includes(q));
+ const grid=document.getElementById("courseGrid");
+ grid.innerHTML=filtered.length?"":"<div class='empty'>Aucune formation trouvée.</div>";
+ filtered.forEach(c=>{
+  const el=document.createElement("article");el.className="card";
+  el.innerHTML=`<div class="iconbox">🎓</div><span class="tag"></span><h3></h3><p></p><div class="card-actions"><button class="open-course">Consulter le cours</button></div>`;
+  el.querySelector(".tag").textContent=c.category;el.querySelector("h3").textContent=c.title;el.querySelector("p").textContent=c.description;
+  el.querySelector("button").onclick=()=>showCourse(c.id);grid.appendChild(el);
+ });
+}
+function showCourse(id){
+ const c=courses.find(x=>x.id===id);if(!c)return;
+ const box=document.getElementById("lessonContent");box.innerHTML="";
+ const title=document.createElement("h2");title.textContent=c.title;box.appendChild(title);
+ const cat=document.createElement("span");cat.className="tag";cat.textContent=c.category;box.appendChild(cat);
+ const desc=document.createElement("p");desc.textContent=c.description;box.appendChild(desc);
+ const h=document.createElement("h3");h.textContent="Leçon 1";box.appendChild(h);
+ const txt=document.createElement("p");txt.style.whiteSpace="pre-wrap";txt.textContent=c.text||"Le contenu de cette leçon sera bientôt disponible.";box.appendChild(txt);
+ if(c.audio){const a=document.createElement("audio");a.controls=true;a.src=c.audio;box.appendChild(a)}
+ if(c.pdf){const p=document.createElement("p");const link=document.createElement("a");link.href=c.pdf;link.download="support-formation.pdf";link.textContent="Télécharger le support PDF";p.appendChild(link);box.appendChild(p)}
+ openModal("lessonModal");
+}
+document.getElementById("registerForm").addEventListener("submit",e=>{
+ e.preventDefault();const student={name:studentName.value.trim(),email:studentEmail.value.trim()};
+ localStorage.setItem("tel_demo_student",JSON.stringify(student));
+ registerMessage.textContent="Merci "+student.name+" ! Votre inscription de démonstration est enregistrée sur cet appareil.";
+ e.target.reset();
+});
+document.getElementById("adminForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ if(adminCode.value==="TEL-DEMO-2026"){adminPanel.classList.remove("hidden");adminMessage.textContent="Mode démonstration ouvert."}
+ else adminMessage.textContent="Code incorrect. Utilisez le code indiqué dans le guide du prototype.";
+});
+document.getElementById("courseForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const audioInput=document.getElementById("audioFile"),pdfInput=document.getElementById("pdfFile");
+ const course={id:Date.now(),title:courseTitle.value.trim(),category:courseCategory.value,description:courseDescription.value.trim(),text:lessonText.value.trim(),audio:null,pdf:null};
+ if(audioInput.files[0])course.audio=URL.createObjectURL(audioInput.files[0]);
+ if(pdfInput.files[0])course.pdf=URL.createObjectURL(pdfInput.files[0]);
+ courses.unshift(course);save();renderCourses();courseMessage.textContent="Formation ajoutée au catalogue de cette session.";
+ e.target.reset();
+});
+document.getElementById("year").textContent=new Date().getFullYear();
+renderCourses();
+</script>
+</body></html>
